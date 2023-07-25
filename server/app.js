@@ -29,22 +29,23 @@ app.enable('trust proxy');
 app.post('/api/fetchStockData', async (req, res) => {
     // YOUR CODE GOES HERE, PLEASE DO NOT EDIT ANYTHING OUTSIDE THIS FUNCTION
     const { stockSymbol, date } = req.body;
+    console.log(req.body)
 
     try {
-        // Make a request to the Polygon API
+        // request to the Polygon API
         const response = await axios.get(`https://api.polygon.io/v1/open-close/${stockSymbol}/${date}?adjusted=true&apiKey=${process.env.POLYGON_API_KEY}`);
 
-        // Extract the required fields from the response
         const { open, high, low, close, volume } = response.data;
-    res.sendStatus(200).json({
-        open,
-        high,
-        low,
-        close,
-        volume,
-    });;
+        console.log(response.data)
+        res.status(200).json({
+            open,
+            high,
+            low,
+            close,
+            volume,
+          });
 } catch (error) {
-    console.error("Error fetching stock data:", error);
+    // console.error("Error fetching stock data:", error);
     res.status(500).json({ error: "Failed to fetch stock data." });
 }
 });
