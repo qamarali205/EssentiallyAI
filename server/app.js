@@ -45,7 +45,7 @@ app.post('/api/fetchStockData', async (req, res) => {
             volume,
           });
 } catch (error) {
-    // console.error("Error fetching stock data:", error);
+    console.error("Error fetching stock data:", error);
     res.status(500).json({ error: "Failed to fetch stock data." });
 }
 });
