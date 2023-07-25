@@ -10,12 +10,14 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(stockSymbol, date);
 
     setLoading(true);
     setError('');
 
     try {
-      const response = await axios.post('/api/fetchStockData', { stockSymbol, date });
+      const response = await axios.post('http://localhost:5000/api/fetchStockData', { stockSymbol, date });
+
       setTradeData(response.data);
     } catch (error) {
       setError('Failed to fetch stock data.');
